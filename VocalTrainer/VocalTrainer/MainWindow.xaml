@@ -1,0 +1,78 @@
+﻿<Window x:Class="VocalTrainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VocalTrainer"
+        mc:Ignorable="d"
+        WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
+        Title="Главная" Height="900" Width="1440" Background="#FF2F2F2F" Foreground="Black" MinWidth="1440" MinHeight="900" MaxWidth="1440" MaxHeight="900">
+
+    <Grid Height="869">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="1083*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
+                          HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                           Margin="0,235,0,448" Grid.Column="1" MouseEnter="ScrollViewer_MouseEnter" Grid.ColumnSpan="2">
+            <Grid x:Name="KeysGrid" />
+        </ScrollViewer>
+
+        <Image x:Name="imgMicrpophone" HorizontalAlignment="Left" Height="129" Margin="10,253,0,0" VerticalAlignment="Top" Width="129" Source="images/microphone.png" MouseDown="DiapasonButton_Click" MouseEnter="ImgMicrpophone_MouseEnter"/>
+        <Image x:Name="imgStart" HorizontalAlignment="Left" Height="129" Margin="10,253,0,0" VerticalAlignment="Top" Width="129" Source="images/start.png" Grid.Column="3" MouseDown="ImgStart_MouseDown" MouseEnter="ImgStart_MouseEnter"/>
+        <Image x:Name="imgPrev" HorizontalAlignment="Left" Height="42" Margin="1036,163,0,0" VerticalAlignment="Top" Width="42" Source="images/prev.png" Grid.Column="1" MouseEnter="ImgPrev_MouseEnter" MouseDown="ImgPrev_MouseDown"/>
+        <Image x:Name="imgNext" HorizontalAlignment="Left" Height="42" Margin="0,163,0,0" VerticalAlignment="Top" Width="42" Source="images/next.png" Grid.Column="2" MouseEnter="ImgNext_MouseEnter" MouseDown="ImgNext_MouseDown"/>
+        <Image x:Name="imgStop" HorizontalAlignment="Left" Height="129" Margin="10,253,0,0" VerticalAlignment="Top" Width="129" Source="images/Stop.png" Grid.Column="3" Visibility="Hidden" MouseDown="ImgStop_MouseDown" MouseEnter="ImgStop_MouseEnter"/>
+        <Button Content="Упражнение 1"  Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Left" Margin="191,98,0,0" VerticalAlignment="Top" Width="28" Click="Button_Click" Height="75"/>
+        <Image x:Name="imgNext_Copy" HorizontalAlignment="Left" Height="42" Margin="3,432,0,0" VerticalAlignment="Top" Width="42" Source="images/next.png" Grid.Column="2" MouseDown="ImgNext_Copy_MouseDown" MouseEnter="ImgNext_Copy_MouseEnter"/>
+        <Slider Name="MySlider" Thumb.DragCompleted="Drag_Completed"  Grid.Column="1" HorizontalAlignment="Left" Height="97" Margin="968,117,0,0" VerticalAlignment="Top" Width="21" Orientation="Vertical" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Cursor="Arrow" Maximum="100" SmallChange="1" Value="50" MouseEnter="MySlider_MouseEnter"/>
+        <TextBlock x:Name="sliderValue" Grid.Column="1" HorizontalAlignment="Left" Margin="970,101,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Foreground="#FF00B359" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+        <Label Content="Упражнение:" Grid.Column="1" HorizontalAlignment="Left" Margin="1036,124,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="81" Background="{x:Null}" Foreground="#FF00B359"/>
+        <Label x:Name="textExersice" Content="-" Grid.Column="2" HorizontalAlignment="Left" Margin="28,124,0,0" VerticalAlignment="Top" Width="18" Background="{x:Null}" Foreground="#FF00B359"/>
+
+        <Grid x:Name="AudioGrid" HorizontalAlignment="Left" Height="855" Margin="142,8,0,0" VerticalAlignment="Top" Width="1286" Visibility="Hidden" Background="#FF2F2F2F" Grid.ColumnSpan="4">
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="365,156,0,0" VerticalAlignment="Top" Width="431" Initialized="ComboBox_Initialized" SelectionChanged="ComboBox_SelectionChanged" MouseEnter="ComboBox_MouseEnter" Foreground="#FF595959" FontFamily="Calibri" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <Label x:Name="label" Content="Выберите устройство" HorizontalAlignment="Left" Margin="454,116,0,0" VerticalAlignment="Top" Foreground="#FF595959" FontFamily="Calibri" FontSize="24"/>
+            <Label x:Name="label1" Content="Мин.Частота =" HorizontalAlignment="Left" Margin="359,189,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Label x:Name="label2" Content="Макс.Частота =" HorizontalAlignment="Left" Margin="591,191,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Label x:Name="label3" Content="0" HorizontalAlignment="Left" Margin="498,190,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Label x:Name="label4" Content="0" HorizontalAlignment="Left" Margin="742,191,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Button x:Name="button" Content="Сброс" HorizontalAlignment="Left" Margin="489,232,0,0" VerticalAlignment="Top" Width="51" Click="Button_Clear" Visibility="Hidden" MouseEnter="Button_MouseEnter" Background="{x:Null}" Foreground="#FF595959" FontFamily="Calibri" FontSize="20"/>
+            <TextBox x:Name="textBoxLog" HorizontalAlignment="Left" Height="399" Margin="571,10,0,0" TextWrapping="Wrap" Text="Log:" VerticalAlignment="Top" Width="139" Grid.Column="1" Visibility="Hidden"/>
+            <Button x:Name="button_Start" Content="Старт" HorizontalAlignment="Left" Margin="488,232,0,0" VerticalAlignment="Top" Width="52" Click="Button_Start_Click" MouseEnter="Button_Start_MouseEnter" Background="{x:Null}" Foreground="#FF595959" FontFamily="Calibri" FontSize="20"/>
+            <Button x:Name="acceptButton" Content="Подтвердить" HorizontalAlignment="Left" Margin="566,232,0,0" VerticalAlignment="Top" Width="118" Click="AcceptButton_Click" Visibility="Hidden" MouseEnter="AcceptButton_MouseEnter" Background="{x:Null}" Foreground="#FF595959" FontFamily="Calibri" FontSize="20"/>
+            <TextBox x:Name="minFreq" HorizontalAlignment="Left" Height="27" Margin="457,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67" Background="{x:Null}" Foreground="Gray" FontSize="22" FontFamily="Calibri" SelectionBrush="{x:Null}" BorderBrush="Gray"/>
+            <TextBox x:Name="maxFreq" HorizontalAlignment="Left" Height="27" Margin="711,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72" Background="{x:Null}" Foreground="Gray" FontSize="22" FontFamily="Calibri" SelectionBrush="{x:Null}" BorderBrush="Gray"/>
+            <Label x:Name="label2_Copy" Content="Либо вы можете вписать значения (мин/макс):" HorizontalAlignment="Left" Margin="349,306,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Label x:Name="label2_Copy1" Content="Мин.Частота = " HorizontalAlignment="Left" Margin="307,370,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Label x:Name="label2_Copy2" Content="Макс.Частота = " HorizontalAlignment="Left" Margin="553,370,0,0" VerticalAlignment="Top" FontFamily="Calibri" Background="#00000000" Foreground="#FF595959" FontSize="22"/>
+            <Button x:Name="button_accept2" Content="Подтвердить" HorizontalAlignment="Left" Margin="517,428,0,0" VerticalAlignment="Top" Width="122" Click="Button_accept2_Click" MouseEnter="Button_Start_MouseEnter" Background="{x:Null}" Foreground="#FF595959" FontFamily="Calibri" FontSize="20"/>
+        </Grid>
+
+        <Image x:Name="imgEmptyBox" HorizontalAlignment="Left" Height="282" Margin="323,578,0,0" VerticalAlignment="Top" Width="490" Source="images/textb.png" Grid.Column="1" RenderTransformOrigin="1,0.5" MouseEnter="ImgEmptyBox_MouseEnter"/>
+        <TextBlock x:Name="imgText" Grid.Column="1" HorizontalAlignment="Left" Margin="343,628,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="215" Width="453" Text="Они будут автоматически появляться если навести курсор на любой элемент программы" FontSize="22" Foreground="#FF00B359"></TextBlock>
+        <TextBlock x:Name="imgHead" Grid.Column="1" HorizontalAlignment="Left" Margin="342,592,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="452" Text="Это блок с подсказками" FontSize="24" Foreground="#FF00B359" FontWeight="Bold"/>
+
+        <Rectangle Fill="#FF2B2B2B" HorizontalAlignment="Left" Height="29" Margin="0,-16,0,0" VerticalAlignment="Top" Width="1440" Grid.ColumnSpan="4" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Image x:Name="exitButton" HorizontalAlignment="Left" Height="30" Margin="121,-16,0,0" VerticalAlignment="Top" Width="29" Source="images/exit.png" Grid.Column="3" MouseDown="ApplicationExit"/>
+        <Image x:Name="svernutButton" HorizontalAlignment="Left" Height="30" Margin="92,-16,0,0" VerticalAlignment="Top" Width="29" Source="images/svernut.png" Grid.Column="3" MouseDown="Svernut"/>
+        <Image x:Name="imgMicrpophone_Copy" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="19" Source="images/Midi.ico" Margin="3,-10,0,0"/>
+        <Label Content="Vocal Trainer" HorizontalAlignment="Left" Margin="23,-14,0,0" VerticalAlignment="Top" Foreground="#FF00B359"/>
+        
+
+
+    </Grid>
+</Window>
